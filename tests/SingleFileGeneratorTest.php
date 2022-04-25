@@ -40,21 +40,6 @@ class SingleFileGeneratorTest extends \Orchestra\Testbench\TestCase
         $this->evaluateSingleOutput('multiple', 'basic_multi_in.js');
     }
 
-    function testInvalidFormat()
-    {
-        $format = 'es5';
-        $inputDir = __DIR__ . '/input/basic';
-
-        try {
-            (new Generator([]))->generateFromPath($inputDir, $format);
-        } catch(RuntimeException $e) {
-            $this->assertEquals('Invalid format passed: ' . $format, $e->getMessage());
-            return;
-        }
-
-// FIXME        $this->fail('No exception thrown for invalid format.');
-    }
-
     function testBasicWithTranslationString()
     {
         $this->evaluateSingleOutput('translation', 'translation.js');
