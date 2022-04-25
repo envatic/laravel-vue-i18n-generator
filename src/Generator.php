@@ -1,4 +1,6 @@
-<?php namespace Envatic\VueI18nGenerator;
+<?php
+
+namespace Envatic\VueI18nGenerator;
 
 use App;
 use Exception;
@@ -11,9 +13,9 @@ class Generator
     private $filesToCreate = [];
     private $langFiles;
 
-    const VUEX_I18N = 'vuex-i18n';
-    const VUE_I18N = 'vue-i18n';
-    const ESCAPE_CHAR = '!';
+    public const VUEX_I18N = 'vuex-i18n';
+    public const VUE_I18N = 'vue-i18n';
+    public const ESCAPE_CHAR = '!';
 
     /**
      * The constructor
@@ -22,13 +24,13 @@ class Generator
      */
     public function __construct($config = [])
     {
-        if (!isset($config['i18nLib'])) {
+        if (! isset($config['i18nLib'])) {
             $config['i18nLib'] = self::VUE_I18N;
         }
-        if (!isset($config['excludes'])) {
+        if (! isset($config['excludes'])) {
             $config['excludes'] = [];
         }
-        if (!isset($config['escape_char'])) {
+        if (! isset($config['escape_char'])) {
             $config['escape_char'] = self::ESCAPE_CHAR;
         }
         $this->config = $config;
@@ -37,13 +39,13 @@ class Generator
     /**
      * @param string $path
      * @param string $format
-     * @param boolean $withVendor
+     * @param bool $withVendor
      * @return string
      * @throws Exception
      */
     public function generateFromPath($path, $format = 'es6', $withVendor = false, $langFiles = [])
     {
-        if (!is_dir($path)) {
+        if (! is_dir($path)) {
             throw new Exception('Directory not found: ' . $path);
         }
 
@@ -54,13 +56,13 @@ class Generator
         $dirList = $this->getDirList($path);
         $jsBody = '';
         foreach ($dirList as $file) {
-                if(!$withVendor
+            if (! $withVendor
                     && in_array($file, array_merge(['vendor'], $this->config['excludes']))
                 ) {
-                    continue;
-                }
+                continue;
+            }
 
-                $files[] = $path . DIRECTORY_SEPARATOR . $file;
+            $files[] = $path . DIRECTORY_SEPARATOR . $file;
         }
 
         foreach ($files as $fileName) {
@@ -76,7 +78,9 @@ class Generator
                     $local = $this->allocateLocaleArray($fileinfo->getRealPath());
                 } else {
                     $local = $this->allocateLocaleJSON($fileinfo->getRealPath());
-                    if ($local === null) continue;
+                    if ($local === null) {
+                        continue;
+                    }
                 }
 
                 if (isset($locales[$noExt])) {
@@ -115,7 +119,7 @@ class Generator
      */
     public function generateMultiple($path, $format = 'es6', $multiLocales = false)
     {
-        if (!is_dir($path)) {
+        if (! is_dir($path)) {
             throw new Exception('Directory not found: ' . $path);
         }
         $jsPath = base_path() . $this->config['jsPath'];
@@ -125,13 +129,13 @@ class Generator
         $dirList = $this->getDirList($path);
         $jsBody = '';
         foreach ($dirList as $file) {
-            if (!in_array($file, array_merge(['vendor'], $this->config['excludes']))) {
+            if (! in_array($file, array_merge(['vendor'], $this->config['excludes']))) {
                 $noExt = $this->removeExtension($file);
                 if ($noExt !== '') {
                     if (class_exists('App')) {
                         App::setLocale($noExt);
                     }
-                    if (!in_array($noExt, $this->availableLocales)) {
+                    if (! in_array($noExt, $this->availableLocales)) {
                         $this->availableLocales[] = $noExt;
                     }
                     $filePath = $path . DIRECTORY_SEPARATOR . $file;
@@ -139,7 +143,9 @@ class Generator
                         $local = $this->allocateLocaleArray($filePath, $multiLocales);
                     } else {
                         $local = $this->allocateLocaleJSON($filePath);
-                        if ($local === null) continue;
+                        if ($local === null) {
+                            continue;
+                        }
                     }
 
                     if (isset($locales[$noExt])) {
@@ -165,12 +171,13 @@ class Generator
                 $jsBody = $jsonLocales;
             }
 
-            if (!is_dir(dirname($fileToCreate))) {
+            if (! is_dir(dirname($fileToCreate))) {
                 mkdir(dirname($fileToCreate), 0777, true);
             }
 
             file_put_contents($fileToCreate, $jsBody);
         }
+
         return $createdFiles;
     }
 
@@ -223,12 +230,13 @@ class Generator
 
                 if (gettype($tmp) !== "array") {
                     throw new Exception('Unexpected data while processing ' . $fileName);
+
                     continue;
                 }
                 if ($lastLocale !== false) {
                     $root = realpath(base_path() . $this->config['langPath'] . DIRECTORY_SEPARATOR . $lastLocale);
                     $filePath = $this->removeExtension(str_replace('\\', '_', ltrim(str_replace($root, '', realpath($fileName)), '\\')));
-                    if($filePath[0] === DIRECTORY_SEPARATOR) {
+                    if ($filePath[0] === DIRECTORY_SEPARATOR) {
                         $filePath = substr($filePath, 1);
                     }
                     if ($multiLocales) {
@@ -241,21 +249,22 @@ class Generator
                 $data[$noExt] = $this->adjustArray($tmp);
             }
         }
+
         return $data;
     }
 
     /**
      * @param string $noExt
-     * @return boolean
+     * @return bool
      */
     private function shouldIgnoreLangFile($noExt)
     {
         // langFiles passed by option have priority
-        if (isset($this->langFiles) && !empty($this->langFiles)) {
-            return !in_array($noExt, $this->langFiles);
+        if (isset($this->langFiles) && ! empty($this->langFiles)) {
+            return ! in_array($noExt, $this->langFiles);
         }
 
-        return (isset($this->config['langFiles']) && !empty($this->config['langFiles']) && !in_array($noExt, $this->config['langFiles']))
+        return (isset($this->config['langFiles']) && ! empty($this->config['langFiles']) && ! in_array($noExt, $this->config['langFiles']))
                     || (isset($this->config['excludes']) && in_array($noExt, $this->config['excludes']));
     }
 
@@ -275,6 +284,7 @@ class Generator
                 $res[$key] = $this->removeEscapeCharacter($this->adjustString($val));
             }
         }
+
         return $res;
     }
 
@@ -310,7 +320,7 @@ class Generator
      */
     private function adjustString($s)
     {
-        if (!is_string($s)) {
+        if (! is_string($s)) {
             return $s;
         }
 
@@ -321,6 +331,7 @@ class Generator
         }
 
         $escaped_escape_char = preg_quote($this->config['escape_char'], '/');
+
         return preg_replace_callback(
             "/(?<!mailto|tel|{$escaped_escape_char}):\w+/",
             function ($matches) {
@@ -340,6 +351,7 @@ class Generator
     private function removeEscapeCharacter($s)
     {
         $escaped_escape_char = preg_quote($this->config['escape_char'], '/');
+
         return preg_replace_callback(
             "/{$escaped_escape_char}(:\w+)/",
             function ($matches) {
@@ -391,6 +403,7 @@ class Generator
     return {$body}
 })));
 HEREDOC;
+
         return $js;
     }
 

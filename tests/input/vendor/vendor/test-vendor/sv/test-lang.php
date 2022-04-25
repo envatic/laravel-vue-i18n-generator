@@ -1,4 +1,5 @@
 <?php
+
 return [
-    'maybe' => 'kanske'
+    'maybe' => 'kanske',
 ];

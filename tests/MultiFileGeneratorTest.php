@@ -2,7 +2,6 @@
 
 use Envatic\VueI18nGenerator\Generator;
 
-
 class MultiFileGeneratorTest extends \Orchestra\Testbench\TestCase
 {
     private $config = [];
@@ -45,7 +44,7 @@ class MultiFileGeneratorTest extends \Orchestra\Testbench\TestCase
 
         $expectedFiles = [];
 
-        foreach($expected as $path => $file) {
+        foreach ($expected as $path => $file) {
             $resultFile = $outDir . $file->getFilename();
             $expectedFiles[] = $resultFile . PHP_EOL;
             $this->assertEquals(
