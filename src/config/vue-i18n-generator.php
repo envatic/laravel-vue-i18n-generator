@@ -4,10 +4,11 @@ return [
     /*
     |--------------------------------------------------------------------------
     | Laravel translations path
+    |
     |--------------------------------------------------------------------------
     |
     | The default path where the translations are stored by Laravel.
-    | Note: the path will be prepended to point to the App directory.
+    | full path eg /var/www/site.net/resources/lang
     |
     */
 
