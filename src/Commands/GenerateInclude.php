@@ -1,8 +1,10 @@
-<?php namespace Envatic\VueI18nGenerator\Commands;
+<?php
 
-use Illuminate\Console\Command;
+namespace Envatic\VueI18nGenerator\Commands;
 
 use Envatic\VueI18nGenerator\Generator;
+
+use Illuminate\Console\Command;
 
 class GenerateInclude extends Command
 {
@@ -44,7 +46,7 @@ class GenerateInclude extends Command
             $format = 'umd';
         }
 
-        if (!$this->isValidFormat($format)) {
+        if (! $this->isValidFormat($format)) {
             throw new \RuntimeException('Invalid format passed: ' . $format);
         }
 
@@ -90,11 +92,12 @@ class GenerateInclude extends Command
 
     /**
      * @param string $format
-     * @return boolean
+     * @return bool
      */
     private function isValidFormat($format)
     {
         $supportedFormats = ['es6', 'umd', 'json'];
+
         return in_array($format, $supportedFormats);
     }
 }
