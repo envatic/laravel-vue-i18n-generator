@@ -1,13 +1,18 @@
 ## About
 
-[![Build Status](https://travis-ci.org/librenms/laravel-vue-i18n-generator.png?branch=master)](https://travis-ci.org/librenms/laravel-vue-i18n-generator)
 
 
-Laravel 5 package that allows you to share your [Laravel localizations](https://laravel.com/docs/5.8/localization)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/envatic/laravel-vue-i18n-generator.svg?style=flat-square)](https://packagist.org/packages/envatic/laravel-vue-i18n-generator)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/envatic/laravel-vue-i18n-generator/run-tests?label=tests)
+[![Total Downloads](https://img.shields.io/packagist/dt/envatic/laravel-vue-i18n-generator.svg?style=flat-square)](https://packagist.org/packages/envatic/laravel-vue-i18n-generator)
+
+
+Laravel 5, 6 , 8  &  9  package that allows you to share your [Laravel localizations](https://laravel.com/docs/5.8/localization)
 with your [vue](http://vuejs.org/) front-end, using [vue-i18n](https://github.com/kazupon/vue-i18n) or [vuex-i18n](https://github.com/dkfbasel/vuex-i18n).
 
-Fork of https://github.com/martinlindhe/laravel-vue-i18n-generator
-
+Fork of https://github.com/Envatic/laravel-vue-i18n-generator
+The package was abandoned by the author, I will now maintain it here
 
 ## Laravel 5.7 notice!
 
@@ -17,7 +22,7 @@ Configuration paths have changed in Laravel 5.7, in order for this package to fu
 ## Install the package
 
 In your project:
-```composer require librenms/laravel-vue-i18n-generator --dev```
+```composer require envatic/laravel-vue-i18n-generator --dev```
 
 ### For Laravel 5.4 and below:
 For older versions of the framework:
@@ -25,13 +30,13 @@ For older versions of the framework:
 Register the service provider in ```config/app.php```
 
 ```php
-MartinLindhe\VueInternationalizationGenerator\GeneratorProvider::class,
+Envatic\VueI18nGenerator\GeneratorProvider::class,
 ```
 
 Next, publish the package default config:
 
 ```
-php artisan vendor:publish --provider="MartinLindhe\VueInternationalizationGenerator\GeneratorProvider"
+php artisan vendor:publish --provider="Envatic\VueI18nGenerator\GeneratorProvider"
 ```
 
 ## Using vue-i18n

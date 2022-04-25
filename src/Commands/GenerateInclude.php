@@ -1,8 +1,8 @@
-<?php namespace MartinLindhe\VueInternationalizationGenerator\Commands;
+<?php namespace Envatic\VueI18nGenerator\Commands;
 
 use Illuminate\Console\Command;
 
-use MartinLindhe\VueInternationalizationGenerator\Generator;
+use Envatic\VueI18nGenerator\Generator;
 
 class GenerateInclude extends Command
 {

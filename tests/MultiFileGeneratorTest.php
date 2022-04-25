@@ -1,6 +1,6 @@
 <?php
 
-use MartinLindhe\VueInternationalizationGenerator\Generator;
+use Envatic\VueI18nGenerator\Generator;
 
 
 class MultiFileGeneratorTest extends \Orchestra\Testbench\TestCase

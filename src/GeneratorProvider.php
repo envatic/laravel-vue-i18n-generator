@@ -1,4 +1,4 @@
-<?php namespace MartinLindhe\VueInternationalizationGenerator;
+<?php namespace Envatic\VueI18nGenerator;
 
 use Illuminate\Support\ServiceProvider;
 
