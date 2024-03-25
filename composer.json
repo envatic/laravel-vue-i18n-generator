@@ -2,7 +2,10 @@
     "name": "envatic/laravel-vue-i18n-generator",
     "license": "MIT",
     "description": "Generates a vue-i18n compatible include file from your Laravel translations.",
-    "keywords": ["laravel","vue-i18n"],
+    "keywords": [
+        "laravel",
+        "vue-i18n"
+    ],
     "homepage": "http://github.com/envatic/laravel-vue-i18n-generator",
     "authors": [
         {
@@ -18,8 +21,8 @@
         "php": "^8.0",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "illuminate/console": "^8|^9|^10.0",
-        "illuminate/support": "^8|^9|^10.0"
+        "illuminate/console": "^8|^9|^10.0|^11.0",
+        "illuminate/support": "^8|^9|^10.0|^11.0"
     },
     "autoload": {
         "psr-4": {
