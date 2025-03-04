@@ -21,8 +21,8 @@
         "php": "^8.0",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "illuminate/console": "^8|^9|^10.0|^11.0",
-        "illuminate/support": "^8|^9|^10.0|^11.0"
+        "illuminate/console": "^8|^9|^10.0|^11.0|^12.0",
+        "illuminate/support": "^8|^9|^10.0|^11.0|^12.0"
     },
     "autoload": {
         "psr-4": {
